@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ProEventos.API.Models;
 
 namespace ProEventos.API.Controllers
@@ -27,7 +25,7 @@ namespace ProEventos.API.Controllers
                     Lote        = "1º Lote",
                     QtdPessoas  = 250,
                     DataEvento  = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-                    ImageURL    = "foto.png"
+                    ImagemURL    = "foto.png"
                 },
                 new Evento() 
                 {
@@ -37,7 +35,7 @@ namespace ProEventos.API.Controllers
                     Lote        = "2º Lote",
                     QtdPessoas  = 350,
                     DataEvento  = DateTime.Now.AddDays(3).ToString("dd/MM/yyyy"),
-                    ImageURL    = "foto1.png"
+                    ImagemURL    = "foto1.png"
                 }
             };
 
@@ -45,6 +43,12 @@ namespace ProEventos.API.Controllers
         public IEnumerable<Evento> Get()
         {
             return this.evento;
+        }
+
+        [HttpGet("{id}")]
+        public IEnumerable<Evento> Get(int id)
+        {
+            return this.evento.Where(e => e.EventoId == id);
         }
 
         [HttpPost]
